@@ -49,10 +49,60 @@ export default class doublyLinkedList {
     }
 
     // indsætter et nyt element efter plads nummer index
-    insertAt(index, data) {}
+    insertAt(index, data) {
+        // Hvis index er mindre end 0 skal der ikke gøres noget
+        if (index < 0) {
+            return;
+        }
+
+        const newNode = new Node(data);
+
+        // hvis listen er tom, eller det skal indsættes på efter sidste element
+        if (index === this.size() - 1) {
+            // Benytter addNodeLast, da det er samme situation
+            this.addNodeLast(newNode);
+            return;
+        }
+
+        // Få noden ved det angivne index
+        const existingNode = this.nodeAt(index);
+
+        // Hvis noden på pladsen eksisterer, indsæt den nye node efter den
+        if (existingNode !== null) {
+            this.insertAfterNode(newNode, existingNode);
+        } else {
+            // Hvis noden ikke findes, gør ingenting
+            return;
+        }
+    }
 
     // indsætter et nyt element før plads nummer index
-    insertBefore(index, data) {}
+    insertBefore(index, data) {
+        // Hvis index er mindre end 0 skal der ikke gøres noget
+        if (index < 0) {
+            return;
+        }
+
+        const newNode = new Node(data);
+
+        // hvis listen er tom, eller det skal indsættes på plads 0
+        if (index === 0) {
+            // Brug addNodeFirst til at indsætte i starten
+            this.addNodeFirst(newNode);
+            return;
+        }
+
+        // Få noden ved det angivne indeks
+        const existingNode = this.nodeAt(index);
+
+        // Hvis noden på pladsen eksisterer, indsæt den nye node før den
+        if (existingNode !== null) {
+            this.insertBeforeNode(newNode, existingNode);
+        } else {
+            // Hvis noden ikke findes, gør ingenting
+            return;
+        }
+    }
 
     // returnerer det første element i listen
     first() {}

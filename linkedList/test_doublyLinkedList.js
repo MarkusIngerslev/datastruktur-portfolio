@@ -148,3 +148,27 @@ console.log("Element ved indeks 5:", list.get(5)); // Forventet output: null (ud
 // Test indexOf(data)
 console.log("Indeks for element R:", list.indexOf("R")); // Forventet output: 2
 console.log("Indeks for element H:", list.indexOf("H")); // Forventet output: -1 (ikke fundet)
+
+// ========================================
+// Test af insertAfter og insertBefore
+// ========================================
+
+list.clear();
+list.addLast("C");
+list.addLast("A");
+list.addLast("R");
+list.addLast("T");
+list.addLast("S");
+
+console.log("Før indsættelse:");
+list.dumpList(); // Forventet output: C, A, R, T, S
+
+// Test insertAt
+list.insertAt(2, "E");
+console.log("\nEfter indsættelse af E ved index 2:");
+list.dumpList(); // Forventet output: C, A, R, E, T, S
+
+// Test insertBefore
+list.insertBefore(2, "D");
+console.log("\nEfter indsættelse af D før indeks 2:");
+list.dumpList(); // Forventet output: C, A, D, R, E, T, S
