@@ -4,14 +4,16 @@ import doublyLinkedList from "./doublyLinkedList.js"; // Importer klassen
 const list = new doublyLinkedList();
 
 console.log("Tilføjer elementer til slutningen af listen:");
-list.addLast(10);
-list.addLast(20);
-list.addLast(30);
+list.addLast("C");
+list.addLast("A");
+list.addLast("T");
 list.dumpList();
 
 console.log("\nTilføjer elementer til begyndelsen af listen:");
-list.addFirst(5);
-list.addFirst(1);
+list.clear();
+list.addFirst("T");
+list.addFirst("A");
+list.addFirst("C");
 list.dumpList();
 
 console.log("\nTester størrelsen af listen:");

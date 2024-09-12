@@ -43,10 +43,48 @@ export default class doublyLinkedList {
     removeIndex(index) {}
 
     // fjerner det første element i listen - og returnerer elementet
-    removeFirst() {}
+    removeFirst() {
+        // Hvis listen er tom
+        if (this.head === null) return null;
+
+        // Gem den node, der fjernes til at returnere dens data
+        const removedNode = this.head;
+
+        // Hvis der kun er ét element i listen
+        if (this.head === this.tail) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            // Fjern det første element, og opdater head
+            this.head = this.head.next;
+            this.head.prev = null;
+        }
+
+        // Returner data fra den fjernede node
+        return removedNode.data;
+    }
 
     // fjerner det sidste element i listen - og returnerer elementet
-    removeLast() {}
+    removeLast() {
+        // Hvis listen er tom
+        if (this.tail === null) return null;
+
+        // Gem den node, der fjernes til at returnere dens data
+        const removedNode = this.tail;
+
+        // Hvis der kun er ét element i listen
+        if (this.head === this.tail) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            // Fjern det sidste element, og opdater tail
+            this.tail = this.tail.prev;
+            this.tail.next = null;
+        }
+
+        // Returner data fra den fjernede node
+        return removedNode.data;
+    }
 
     // ========================================
     // metoder til at operere direkte på nodes
