@@ -111,10 +111,44 @@ export default class doublyLinkedList {
     last() {}
 
     // fjerner elementet fra listen (hvis det altså var der)
-    remove(data) {}
+    remove(data) {
+        let current = this.head;
+
+        // Gennemgå listen for at finde den første node med det ønskede data
+        while (current !== null) {
+            if (current.data === data) {
+                // Brug removeNode til at fjerne den fundne node
+                this.removeNode(current);
+                // Returner true for at indikere, at elementet blev fjernet
+                return true;
+            }
+            current = current.next;
+        }
+
+        // Returner false, hvis elementet ikke blev fundet
+        return false;
+    }
 
     // fjerner elementet på det pågældende index
-    removeIndex(index) {}
+    removeIndex(index) {
+        if (index < 0 || index >= this.size()) {
+            // Ugyldigt index, returner false
+            return false;
+        }
+
+        // Få noden ved det angivne index
+        const nodeToRemove = this.nodeAt(index);
+
+        if (nodeToRemove !== null) {
+            // benytter removeNode til at fjerne noden
+            this.removeNode(nodeToRemove);
+            // Returner true for at indikere, at noden blev fjernet
+            return true;
+        }
+
+        // Returner false, hvis noden ikke kunne findes
+        return false; 
+    }
 
     // fjerner det første element i listen - og returnerer elementet
     removeFirst() {

@@ -160,7 +160,7 @@ list.addLast("R");
 list.addLast("T");
 list.addLast("S");
 
-console.log("Før indsættelse:");
+console.log("\nFør indsættelse:");
 list.dumpList(); // Forventet output: C, A, R, T, S
 
 // Test insertAt
@@ -172,3 +172,27 @@ list.dumpList(); // Forventet output: C, A, R, E, T, S
 list.insertBefore(2, "D");
 console.log("\nEfter indsættelse af D før indeks 2:");
 list.dumpList(); // Forventet output: C, A, D, R, E, T, S
+
+// ========================================
+// Test af remove(data) og removeIndex(index)
+// ========================================
+
+list.clear();
+list.addLast("C");
+list.addLast("A");
+list.addLast("R");
+list.addLast("T");
+list.addLast("S");
+
+console.log("\nFør fjernelse:");
+list.dumpList(); // Forventet output: C, A, R, T, S
+
+// Test remove(data)
+console.log("\nFjerner R:");
+list.remove("R");
+list.dumpList(); // Forventet output: C, A, T, S
+
+// Test removeIndex(index)
+console.log("\nFjerner element på indeks 1:");
+list.removeIndex(1);
+list.dumpList(); // Forventet output: C, T, S
