@@ -1,4 +1,4 @@
-export default class SinglyLinkedList {
+export default class DoublyLinkedList {
     head = null;
     tail = null;
 
@@ -47,10 +47,32 @@ export default class SinglyLinkedList {
     // ========================================
 
     // tilføjer en ny node til slutningen af listen
-    addNodeLast(newNode) {}
+    addNodeLast(newNode) {
+        if (this.tail === null) {
+            // Hvis listen er tom
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            // Tilføj til slutningen af listen
+            newNode.prev = this.tail;
+            this.tail.next = newNode;
+            this.tail = newNode;
+        }
+    }
 
     // tilføjer en ny node i starten af listen
-    addNodeFirst(newNode) {}
+    addNodeFirst(newNode) {
+        if (this.head === null) {
+            // Hvis listen er tom
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            // Tilføj til starten af listen
+            newNode.next = this.head;
+            this.head.prev = newNode;
+            this.head = newNode;
+        }
+    }
 
     // indsætter en ny node efter en eksisterende
     insertAfterNode(newNode, existingNode) {}
@@ -74,6 +96,7 @@ export default class SinglyLinkedList {
     // der fjerner alle nodes fra listen, og sørger for at den er tom
     clear() {
         this.head = null;
+        this.tail = null;
     }
 
     // der returnerer antallet af nodes i listen
@@ -102,11 +125,11 @@ export default class SinglyLinkedList {
 }
 
 class Node {
-    next; // den peger hen på næste node
+    next = null; // den peger hen på næste node
+    prev = null; // den peger hen på forrige node
     data; // den peger hen på data i noden
 
     constructor(data) {
         this.data = data;
-        this.next = null;
     }
 }
