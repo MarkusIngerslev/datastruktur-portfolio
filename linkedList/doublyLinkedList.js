@@ -1,128 +1,75 @@
 export default class SinglyLinkedList {
     head = null;
+    tail = null;
 
-    // Der opretter en ny node, med link til data-objektet, og tilføjer den til listen
-    add(enemy) {
-        const node = new Node(enemy);
-        if (this.head == null) {
-            // hvis listen er tom
-            this.head = node;
-        } else {
-            node.next = this.head;
-            this.head = node;
-        }
-    }
+    // ========================================
+    // metoder der behandler data objekter
+    // ========================================
 
-    // Der finder en node med link til dét data-objekt, og fjerner den noden.
-    remove(data) {
-        const nodeToRemove = this.getNodeWith(data);
-        if (nodeToRemove) {
-            console.log(nodeToRemove);
-            this.removeNode(nodeToRemove);
-        }
-    }
+    // tilføjer et element til slutningen af listen
+    addLast(data) {}
 
-    // Der returnerer data i den første node i listen
-    getFirst() {
-        const node = this.getFirstNode();
-        // tjek om der er en node - hvis ikke returner null
-        return node ? node.data : null;
-    }
+    // tilføjer et element til begyndelsen af listen
+    addFirst(data) {}
 
-    // Der returnerer data-objektet på det pågældende index i listen.
-    getLast() {
-        let current = this.head;
-        // hvis listen er tom returner null
-        if (!current) return null;
+    // returnerer elementet på plads nummer index
+    get(index) {}
 
-        while (current.next !== null) {
-            current = current.next;
-        }
-        return current.data;
-    }
+    // finder plads nummer for det angivne element (payload)
+    indexOf(data) {}
 
-    // der returnerer den første node i listen
-    getFirstNode() {
-        return this.head;
-    }
+    // indsætter et nyt element efter plads nummer index
+    insertAt(index, data) {}
 
-    // Der returnerer noden efter denne (eller null, hvis der ikke er nogen)
-    getNextNode(node) {
-        // hvis der ikke er nogen node returner null
-        return node ? node.next : null;
-    }
+    // indsætter et nyt element før plads nummer index
+    insertBefore(index, data) {}
 
-    // Der returnerer den sidste node i listen
-    getLastNode() {
-        let current = this.head;
-        // hvis listen er tom returner null
-        if (!current) return null;
+    // returnerer det første element i listen
+    first() {}
 
-        while (current.next !== null) {
-            current = current.next;
-        }
-        return current;
-    }
+    // returnerer det sidste element i listen
+    last() {}
 
-    // Der returnerer den node der linker til dette data-objekt
-    getNodeWith(data) {
-        let current = this.head;
-        while (current !== null) {
-            if (current.data == data) {
-                return current;
-            }
-            current = current.next;
-        }
-        // hvis der ikke er nogen node der linker til dette data-objekt returner null
-        return null;
-    }
+    // fjerner elementet fra listen (hvis det altså var der)
+    remove(data) {}
 
-    // der fjerner den første node fra listen
-    removeFirstNode() {
-        if (this.head) {
-            this.head = this.head.next;
-        }
-    }
+    // fjerner elementet på det pågældende index
+    removeIndex(index) {}
 
-    // Der fjerner den sidste node fra listen
-    removeLastNode() {
-        // hvis listen er tom returner null
-        if (!this.head) return;
+    // fjerner det første element i listen - og returnerer elementet
+    removeFirst() {}
 
-        if (!this.head.next) {
-            // hvis der kun er en node i listen
-            this.head = null;
-            return;
-        }
+    // fjerner det sidste element i listen - og returnerer elementet
+    removeLast() {}
 
-        let current = this.head;
-        // hvis der er flere end én node i listen
-        while (current.next.next !== null) {
-            current = current.next;
-        }
-        // fjerner den sidste node
-        current.next = null;
-    }
+    // ========================================
+    // metoder til at operere direkte på nodes
+    // ========================================
 
-    // Der fjerner dén node fra listen
-    removeNode(node) {
-        // Hvis noden der skal fjernes er head
-        if (this.head === node) {
-            this.head = this.head.next;
-            return;
-        }
+    // tilføjer en ny node til slutningen af listen
+    addNodeLast(newNode) {}
 
-        // Finder noden før den, der skal fjernes
-        let current = this.head;
-        while (current.next && current.next !== node) {
-            current = current.next;
-        }
+    // tilføjer en ny node i starten af listen
+    addNodeFirst(newNode) {}
 
-        // Hvis vi fandt den node, der skal fjernes
-        if (current.next === node) {
-            current.next = node.next;
-        }
-    }
+    // indsætter en ny node efter en eksisterende
+    insertAfterNode(newNode, existingNode) {}
+
+    // indsætter en ny node før en eksisterende
+    insertBeforeNode(newNode, existingNode) {}
+
+    // fjerner en node fra listen
+    removeNode(existingNode) {}
+
+    // returnerer noden på plads nummer index
+    nodeAt(index) {}
+
+    // bytter om på to nodes pladser i listen
+    swapNodes(node1, node2) {}
+
+    // ========================================
+    // metoder der omhandler hele listen
+    // ========================================
 
     // der fjerner alle nodes fra listen, og sørger for at den er tom
     clear() {
@@ -140,6 +87,10 @@ export default class SinglyLinkedList {
         return count;
     }
 
+    // ========================================
+    // Udvikling, testing og debugging
+    // ========================================
+
     // der console.log'er alle data-elementer i listen
     dumpList() {
         let current = this.head;
@@ -152,7 +103,7 @@ export default class SinglyLinkedList {
 
 class Node {
     next; // den peger hen på næste node
-    data; // den peger hen på data som er enemy i dette tilfælde
+    data; // den peger hen på data i noden
 
     constructor(data) {
         this.data = data;
