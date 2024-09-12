@@ -196,3 +196,25 @@ list.dumpList(); // Forventet output: C, A, T, S
 console.log("\nFjerner element på indeks 1:");
 list.removeIndex(1);
 list.dumpList(); // Forventet output: C, T, S
+
+// ========================================
+// Test af first og last
+// ========================================
+
+list.clear();
+list.addLast("C");
+list.addLast("A");
+list.addLast("R");
+list.addLast("T");
+list.addLast("S");
+
+console.log("\nHele listen:");
+list.dumpList(); // Forventet output: C, A, R, T, S
+
+console.log("Første element i listen:", list.first()); // Forventet output: C
+console.log("Sidste element i listen:", list.last()); // Forventet output: S
+
+list.clear(); // Fjern alle elementer fra listen
+
+console.log("Efter clear - første element:", list.first()); // Forventet output: null
+console.log("Efter clear - sidste element:", list.last()); // Forventet output: null

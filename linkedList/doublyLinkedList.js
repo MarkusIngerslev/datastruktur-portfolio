@@ -105,10 +105,24 @@ export default class doublyLinkedList {
     }
 
     // returnerer det første element i listen
-    first() {}
+    first() {
+        if (this.head === null) {
+            // Hvis listen er tom, returner null
+            return null; 
+        }
+        // Returner data fra den første node
+        return this.head.data; 
+    }
 
     // returnerer det sidste element i listen
-    last() {}
+    last() {
+        if (this.tail === null) {
+            // Hvis listen er tom, returner null
+            return null; 
+        }
+        // Returner data fra den sidste node
+        return this.tail.data; 
+    }
 
     // fjerner elementet fra listen (hvis det altså var der)
     remove(data) {
@@ -147,7 +161,7 @@ export default class doublyLinkedList {
         }
 
         // Returner false, hvis noden ikke kunne findes
-        return false; 
+        return false;
     }
 
     // fjerner det første element i listen - og returnerer elementet
