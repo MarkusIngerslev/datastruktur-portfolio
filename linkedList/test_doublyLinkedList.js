@@ -110,3 +110,22 @@ list.swapNodes(node1, node2); // Byt node C og node R
 
 console.log("\nEfter bytte af 10 og 30:");
 list.dumpList(); // Forventet output: R, A, C, T
+
+// ========================================
+// Test af nodeAt
+// ========================================
+
+list.clear();
+list.addLast("C");
+list.addLast("A");
+list.addLast("R");
+list.addLast("T");
+list.addLast("S");
+
+console.log("\nTest af nodeAt(2):");
+const node3 = list.nodeAt(2);
+console.log(node3 ? node3.data : "Noden blev ikke fundet"); // Forventet output: R
+
+console.log("\nTest af nodeAt(5):");
+const node4 = list.nodeAt(5);
+console.log(node4 ? node4.data : "Noden blev ikke fundet"); // Forventet output: "Noden blev ikke fundet"

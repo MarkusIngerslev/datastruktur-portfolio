@@ -195,7 +195,18 @@ export default class doublyLinkedList {
     }
 
     // returnerer noden på plads nummer index
-    nodeAt(index) {}
+    nodeAt(index) {
+        let current = this.head;
+        let count = 0;
+        while (current !== null) {
+            if (count === index) {
+                return current;
+            }
+            count++;
+            current = current.next;
+        }
+        return null
+    }
 
     // bytter om på to nodes pladser i listen
     swapNodes(node1, node2) {
