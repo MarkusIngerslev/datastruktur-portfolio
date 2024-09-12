@@ -129,3 +129,22 @@ console.log(node3 ? node3.data : "Noden blev ikke fundet"); // Forventet output:
 console.log("\nTest af nodeAt(5):");
 const node4 = list.nodeAt(5);
 console.log(node4 ? node4.data : "Noden blev ikke fundet"); // Forventet output: "Noden blev ikke fundet"
+
+// ========================================
+// Test af get(index) og indexOf(data)
+// ========================================
+
+list.clear();
+list.addLast("C");
+list.addLast("A");
+list.addLast("R");
+list.addLast("T");
+list.addLast("S");
+
+// Test get(index)
+console.log("Element ved indeks 2:", list.get(2)); // Forventet output: R
+console.log("Element ved indeks 5:", list.get(5)); // Forventet output: null (ude af rækkevidde)
+
+// Test indexOf(data)
+console.log("Indeks for element R:", list.indexOf("R")); // Forventet output: 2
+console.log("Indeks for element H:", list.indexOf("H")); // Forventet output: -1 (ikke fundet)

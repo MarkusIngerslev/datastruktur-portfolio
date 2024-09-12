@@ -19,10 +19,34 @@ export default class doublyLinkedList {
     }
 
     // returnerer elementet på plads nummer index
-    get(index) {}
+    get(index) {
+        // Brug nodeAt for at finde noden ved index
+        const node = this.nodeAt(index);
+        if (node === null) {
+            // Hvis der ikke er nogen node på det pågældende index
+            return null;
+        }
+        // Returner data fra noden
+        return node.data;
+    }
 
     // finder plads nummer for det angivne element (payload)
-    indexOf(data) {}
+    indexOf(data) {
+        let current = this.head;
+        let index = 0;
+
+        // Gennemgå listen for at finde den første node med den givne data
+        while (current !== null) {
+            if (current.data === data) {
+                // Returner indekset, hvis dataen matcher
+                return index;
+            }
+            current = current.next;
+            index++;
+        }
+
+        return -1; // Returner -1, hvis dataen ikke findes i listen
+    }
 
     // indsætter et nyt element efter plads nummer index
     insertAt(index, data) {}
@@ -205,21 +229,21 @@ export default class doublyLinkedList {
             count++;
             current = current.next;
         }
-        return null
+        return null;
     }
 
     // bytter om på to nodes pladser i listen
     swapNodes(node1, node2) {
         if (node1 === node2 || node1 === null || node2 === null) {
-            return;  // Hvis de er den samme node eller en af dem er null, gør ingenting
+            return; // Hvis de er den samme node eller en af dem er null, gør ingenting
         }
-    
+
         // Gem referencerne til node1 og node2's forrige og næste noder
         const prev1 = node1.prev;
         const next1 = node1.next;
         const prev2 = node2.prev;
         const next2 = node2.next;
-    
+
         // Hvis node1 er lige før node2 (de er naboer)
         if (next1 === node2) {
             // Byt om ved at opdatere noderne
@@ -227,12 +251,12 @@ export default class doublyLinkedList {
             node1.prev = node2;
             node2.next = node1;
             node2.prev = prev1;
-    
+
             // Opdater den næste node efter node2 (hvis den findes)
             if (next2) {
                 next2.prev = node1;
             }
-    
+
             // Opdater den forrige node før node1 (hvis den findes)
             if (prev1) {
                 prev1.next = node2;
@@ -245,12 +269,12 @@ export default class doublyLinkedList {
             node2.prev = node1;
             node1.next = node2;
             node1.prev = prev2;
-    
+
             // Opdater den næste node efter node1 (hvis den findes)
             if (next1) {
                 next1.prev = node2;
             }
-    
+
             // Opdater den forrige node før node2 (hvis den findes)
             if (prev2) {
                 prev2.next = node1;
@@ -265,7 +289,7 @@ export default class doublyLinkedList {
             if (next1) {
                 next1.prev = node2;
             }
-    
+
             // Opdater node2's nabonoder til at pege på node1
             if (prev2) {
                 prev2.next = node1;
@@ -273,28 +297,27 @@ export default class doublyLinkedList {
             if (next2) {
                 next2.prev = node1;
             }
-    
+
             // Byt node1 og node2's next og prev referencer
             node1.next = next2;
             node1.prev = prev2;
             node2.next = next1;
             node2.prev = prev1;
         }
-    
+
         // Hvis node1 eller node2 var head eller tail, skal vi opdatere listen
         if (this.head === node1) {
             this.head = node2;
         } else if (this.head === node2) {
             this.head = node1;
         }
-    
+
         if (this.tail === node1) {
             this.tail = node2;
         } else if (this.tail === node2) {
             this.tail = node1;
         }
     }
-    
 
     // ========================================
     // metoder der omhandler hele listen
