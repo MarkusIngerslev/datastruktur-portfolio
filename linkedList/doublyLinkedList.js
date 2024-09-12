@@ -125,7 +125,41 @@ export default class doublyLinkedList {
     insertBeforeNode(newNode, existingNode) {}
 
     // fjerner en node fra listen
-    removeNode(existingNode) {}
+    removeNode(existingNode) {
+        if (existingNode === null || this.head === null) {
+            // Hvis noden eller listen er tom, gør ingenting
+            return null;
+        }
+    
+        // Hvis det er den eneste node i listen
+        if (this.head === this.tail && this.head === existingNode) {
+            this.head = null;
+            this.tail = null;
+        }
+        // Hvis det er den første node
+        else if (existingNode === this.head) {
+            this.head = this.head.next;
+            this.head.prev = null;  // Fjern referencen til den gamle head
+        }
+        // Hvis det er den sidste node
+        else if (existingNode === this.tail) {
+            this.tail = this.tail.prev;
+            this.tail.next = null;  // Fjern referencen til den gamle tail
+        }
+        // Hvis det er en node i midten
+        else {
+            existingNode.prev.next = existingNode.next;
+            existingNode.next.prev = existingNode.prev;
+        }
+    
+        // Til sidst, fjern referencerne til listen fra den fjernede node
+        existingNode.next = null;
+        existingNode.prev = null;
+    
+        // Returnér dataen fra den fjernede node
+        return existingNode.data;
+    }
+    
 
     // returnerer noden på plads nummer index
     nodeAt(index) {}
