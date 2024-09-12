@@ -1,4 +1,4 @@
-export default class DoublyLinkedList {
+export default class doublyLinkedList {
     head = null;
     tail = null;
 
