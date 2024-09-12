@@ -3,6 +3,14 @@ import doublyLinkedList from "./doublyLinkedList.js"; // Importer klassen
 // Opret en ny instans af DoublyLinkedList
 const list = new doublyLinkedList();
 
+class Node {
+    constructor(data) {
+        this.data = data;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
 // ========================================
 // Test af addFirst og addLast
 // ========================================
@@ -60,3 +68,24 @@ const nodeToRemove = list.head.next; // Node med data A
 console.log("\nFjerner node med data:", nodeToRemove.data);
 list.removeNode(nodeToRemove);
 list.dumpList(); // Forventet output: C, R, T
+
+// ========================================
+// Test af insertBeforeNode
+// ========================================
+
+list.clear();
+list.addLast("C");
+list.addLast("A");
+list.addLast("T");
+console.log("Før indsættelse:");
+list.dumpList(); // Forventet output: C, A, T
+
+const newNode = new Node("R");
+list.insertAfterNode(newNode, list.head.next); // Indsæt R efter node med data A
+console.log("\nEfter indsættelse af R efter A:");
+list.dumpList(); // Forventet output: C, A, R, T
+
+const newNode2 = new Node("E");
+list.insertBeforeNode(newNode2, list.head.next); // Indsæt E før node med data A
+console.log("\nEfter indsættelse af E før A:");
+list.dumpList(); // Forventet output: C, E, A, R, T

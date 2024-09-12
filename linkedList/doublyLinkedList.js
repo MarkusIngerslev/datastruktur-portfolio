@@ -119,10 +119,44 @@ export default class doublyLinkedList {
     }
 
     // indsætter en ny node efter en eksisterende
-    insertAfterNode(newNode, existingNode) {}
+    insertAfterNode(newNode, existingNode) {
+        if (existingNode === null) {
+            // Kan ikke indsætte efter en ikke-eksisterende node
+            return;
+        }
+
+        // Hvis eksisterende node er den sidste node
+        if (existingNode === this.tail) {
+            this.addNodeLast(newNode); // Brug addNodeLast, da det er samme situation
+        } else {
+            // Indsæt ny node mellem existingNode og existingNode.next
+            newNode.next = existingNode.next;
+            newNode.prev = existingNode;
+
+            existingNode.next.prev = newNode; // Forbind den næste node til newNode
+            existingNode.next = newNode; // Forbind existingNode til newNode
+        }
+    }
 
     // indsætter en ny node før en eksisterende
-    insertBeforeNode(newNode, existingNode) {}
+    insertBeforeNode(newNode, existingNode) {
+        if (existingNode === null) {
+            // Kan ikke indsætte før en ikke-eksisterende node
+            return;
+        }
+
+        // Hvis eksisterende node er den første node
+        if (existingNode === this.head) {
+            this.addNodeFirst(newNode); // Brug addNodeFirst, da det er samme situation
+        } else {
+            // Indsæt ny node mellem existingNode.prev og existingNode
+            newNode.next = existingNode;
+            newNode.prev = existingNode.prev;
+
+            existingNode.prev.next = newNode; // Forbind den forrige node til newNode
+            existingNode.prev = newNode; // Forbind existingNode til newNode
+        }
+    }
 
     // fjerner en node fra listen
     removeNode(existingNode) {
@@ -130,7 +164,7 @@ export default class doublyLinkedList {
             // Hvis noden eller listen er tom, gør ingenting
             return null;
         }
-    
+
         // Hvis det er den eneste node i listen
         if (this.head === this.tail && this.head === existingNode) {
             this.head = null;
@@ -139,27 +173,26 @@ export default class doublyLinkedList {
         // Hvis det er den første node
         else if (existingNode === this.head) {
             this.head = this.head.next;
-            this.head.prev = null;  // Fjern referencen til den gamle head
+            this.head.prev = null; // Fjern referencen til den gamle head
         }
         // Hvis det er den sidste node
         else if (existingNode === this.tail) {
             this.tail = this.tail.prev;
-            this.tail.next = null;  // Fjern referencen til den gamle tail
+            this.tail.next = null; // Fjern referencen til den gamle tail
         }
         // Hvis det er en node i midten
         else {
             existingNode.prev.next = existingNode.next;
             existingNode.next.prev = existingNode.prev;
         }
-    
+
         // Til sidst, fjern referencerne til listen fra den fjernede node
         existingNode.next = null;
         existingNode.prev = null;
-    
+
         // Returnér dataen fra den fjernede node
         return existingNode.data;
     }
-    
 
     // returnerer noden på plads nummer index
     nodeAt(index) {}
@@ -203,11 +236,9 @@ export default class doublyLinkedList {
 }
 
 class Node {
-    next = null; // den peger hen på næste node
-    prev = null; // den peger hen på forrige node
-    data; // den peger hen på data i noden
-
     constructor(data) {
         this.data = data;
+        this.next = null;
+        this.prev = null;
     }
 }
