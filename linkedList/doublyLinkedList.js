@@ -7,10 +7,16 @@ export default class DoublyLinkedList {
     // ========================================
 
     // tilføjer et element til slutningen af listen
-    addLast(data) {}
+    addLast(data) {
+        const newNode = new Node(data);
+        this.addNodeLast(newNode);
+    }
 
     // tilføjer et element til begyndelsen af listen
-    addFirst(data) {}
+    addFirst(data) {
+        const newNode = new Node(data);
+        this.addNodeFirst(newNode);
+    }
 
     // returnerer elementet på plads nummer index
     get(index) {}
