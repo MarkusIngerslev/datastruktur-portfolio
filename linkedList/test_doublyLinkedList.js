@@ -42,7 +42,7 @@ list.clear();
 list.addLast("C");
 list.addLast("A");
 list.addLast("T");
-console.log("Før fjernelse:");
+console.log("\nFør fjernelse:");
 list.addLast(list.removeLast());
 list.dumpList();
 
@@ -61,7 +61,7 @@ list.addLast("C");
 list.addLast("A");
 list.addLast("R");
 list.addLast("T");
-console.log("Før fjernelse:");
+console.log("\nFør fjernelse:");
 list.dumpList(); // Forventet output: C, A, R, T
 
 const nodeToRemove = list.head.next; // Node med data A
@@ -70,14 +70,14 @@ list.removeNode(nodeToRemove);
 list.dumpList(); // Forventet output: C, R, T
 
 // ========================================
-// Test af insertBeforeNode
+// Test af insertBeforeNode & insertAfterNode
 // ========================================
 
 list.clear();
 list.addLast("C");
 list.addLast("A");
 list.addLast("T");
-console.log("Før indsættelse:");
+console.log("\nFør indsættelse:");
 list.dumpList(); // Forventet output: C, A, T
 
 const newNode = new Node("R");
@@ -89,3 +89,24 @@ const newNode2 = new Node("E");
 list.insertBeforeNode(newNode2, list.head.next); // Indsæt E før node med data A
 console.log("\nEfter indsættelse af E før A:");
 list.dumpList(); // Forventet output: C, E, A, R, T
+
+// ========================================
+// Test af swapNodes
+// ========================================
+
+list.clear();
+list.addLast("C");
+list.addLast("A");
+list.addLast("R");
+list.addLast("T");
+
+console.log("\nFør bytte:");
+list.dumpList(); // Forventet output: C, A, R, T
+
+const node1 = list.head; // Node med data C
+const node2 = list.head.next.next; // Node med data R
+
+list.swapNodes(node1, node2); // Byt node C og node R
+
+console.log("\nEfter bytte af 10 og 30:");
+list.dumpList(); // Forventet output: R, A, C, T

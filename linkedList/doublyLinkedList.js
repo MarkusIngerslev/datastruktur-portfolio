@@ -198,7 +198,92 @@ export default class doublyLinkedList {
     nodeAt(index) {}
 
     // bytter om på to nodes pladser i listen
-    swapNodes(node1, node2) {}
+    swapNodes(node1, node2) {
+        if (node1 === node2 || node1 === null || node2 === null) {
+            return;  // Hvis de er den samme node eller en af dem er null, gør ingenting
+        }
+    
+        // Gem referencerne til node1 og node2's forrige og næste noder
+        const prev1 = node1.prev;
+        const next1 = node1.next;
+        const prev2 = node2.prev;
+        const next2 = node2.next;
+    
+        // Hvis node1 er lige før node2 (de er naboer)
+        if (next1 === node2) {
+            // Byt om ved at opdatere noderne
+            node1.next = next2;
+            node1.prev = node2;
+            node2.next = node1;
+            node2.prev = prev1;
+    
+            // Opdater den næste node efter node2 (hvis den findes)
+            if (next2) {
+                next2.prev = node1;
+            }
+    
+            // Opdater den forrige node før node1 (hvis den findes)
+            if (prev1) {
+                prev1.next = node2;
+            }
+        }
+        // Hvis node2 er lige før node1 (de er naboer, men i omvendt rækkefølge)
+        else if (next2 === node1) {
+            // Byt om ved at opdatere noderne
+            node2.next = next1;
+            node2.prev = node1;
+            node1.next = node2;
+            node1.prev = prev2;
+    
+            // Opdater den næste node efter node1 (hvis den findes)
+            if (next1) {
+                next1.prev = node2;
+            }
+    
+            // Opdater den forrige node før node2 (hvis den findes)
+            if (prev2) {
+                prev2.next = node1;
+            }
+        }
+        // Hvis node1 og node2 ikke er naboer
+        else {
+            // Opdater node1's nabonoder til at pege på node2
+            if (prev1) {
+                prev1.next = node2;
+            }
+            if (next1) {
+                next1.prev = node2;
+            }
+    
+            // Opdater node2's nabonoder til at pege på node1
+            if (prev2) {
+                prev2.next = node1;
+            }
+            if (next2) {
+                next2.prev = node1;
+            }
+    
+            // Byt node1 og node2's next og prev referencer
+            node1.next = next2;
+            node1.prev = prev2;
+            node2.next = next1;
+            node2.prev = prev1;
+        }
+    
+        // Hvis node1 eller node2 var head eller tail, skal vi opdatere listen
+        if (this.head === node1) {
+            this.head = node2;
+        } else if (this.head === node2) {
+            this.head = node1;
+        }
+    
+        if (this.tail === node1) {
+            this.tail = node2;
+        } else if (this.tail === node2) {
+            this.tail = node1;
+        }
+    }
+    
 
     // ========================================
     // metoder der omhandler hele listen
