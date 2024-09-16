@@ -49,7 +49,7 @@ export default class doublyLinkedList {
     }
 
     // indsætter et nyt element efter plads nummer index
-    insertAt(index, data) {
+    insertAfter(index, data) {
         // Hvis index er mindre end 0 skal der ikke gøres noget
         if (index < 0) {
             return;
@@ -108,20 +108,20 @@ export default class doublyLinkedList {
     first() {
         if (this.head === null) {
             // Hvis listen er tom, returner null
-            return null; 
+            return null;
         }
         // Returner data fra den første node
-        return this.head.data; 
+        return this.head.data;
     }
 
     // returnerer det sidste element i listen
     last() {
         if (this.tail === null) {
             // Hvis listen er tom, returner null
-            return null; 
+            return null;
         }
         // Returner data fra den sidste node
-        return this.tail.data; 
+        return this.tail.data;
     }
 
     // fjerner elementet fra listen (hvis det altså var der)

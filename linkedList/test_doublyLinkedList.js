@@ -164,7 +164,7 @@ console.log("\nFør indsættelse:");
 list.dumpList(); // Forventet output: C, A, R, T, S
 
 // Test insertAt
-list.insertAt(2, "E");
+list.insertAfter(2, "E");
 console.log("\nEfter indsættelse af E ved index 2:");
 list.dumpList(); // Forventet output: C, A, R, E, T, S
 
