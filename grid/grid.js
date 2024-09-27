@@ -1,7 +1,7 @@
 export class grid {
     constructor(rows, cols) {
-        this.rows = rows;
-        this.cols = cols;
+        this._rows = rows;
+        this._cols = cols;
 
         // Laver et array gemt som et 1D array
         this.grid = new Array(rows * cols).fill(0);
@@ -12,7 +12,7 @@ export class grid {
         // Laver et objekt med row og col, så jeg kan bruge det i metoden
         const { row: r, col: c } = this._parseParams(row, col);
         // Tjekker om r og c er indenfor det angivet grid
-        if (r >= 0 && r < this.rows && c >= 0 && c < this.cols) {
+        if (r >= 0 && r < this._rows && c >= 0 && c < this._cols) {
             // Sætter value på angivet plads
             this.grid[this.indexFor(r, c)] = value;
         }
@@ -23,7 +23,7 @@ export class grid {
         // Laver et objekt med row og col, så jeg kan bruge det i metoden
         const { row: r, col: c } = this._parseParams(row, col);
         // Tjekker om r og c er indenfor det angivet grid
-        if (r >= 0 && r < this.rows && c >= 0 && c < this.cols) {
+        if (r >= 0 && r < this._rows && c >= 0 && c < this._cols) {
             // Returnerer value på angivet plads
             return this.grid[this.indexFor(r, c)];
         }
@@ -31,15 +31,15 @@ export class grid {
 
     // Returnerer index (nummeret) på cellen i den række + kolonne
     indexFor(row, col) {
-        return row * this.cols + col;
+        return row * this._cols + col;
     }
 
     // Returnerer et {row, col} objekt for cellen med dette index (nummer)
     rowColFor(index) {
         // Finder rækken ved at dividere index med antal kolonner
-        const row = Math.floor(index / this.cols);
+        const row = Math.floor(index / this._cols);
         // Finder kolonnen ved at tage resten af index dividere med antal kolonner
-        const col = index % this.cols;
+        const col = index % this._cols;
         // Returnerer objektet med row og col for cellen med dette index
         return { row, col };
     }
@@ -83,7 +83,7 @@ export class grid {
             // Tjekker om der er en nabo i den retning
             if (direction) {
                 // Pusher naboen til listen over naboer for retningen
-                neighbours.push.push({ row: direction.row, col: direction.col });
+                neighbours.push({ row: direction.row, col: direction.col });
             }
         });
 
@@ -101,7 +101,7 @@ export class grid {
         // Laver et objekt med row og col, så jeg kan bruge det i metoden
         const { row: r, col: c } = this._parseParams(row, col);
         // Tjekker om der er en celle til højre for denne
-        if (c + 1 < this.cols) {
+        if (c + 1 < this._cols) {
             // Returnerer objekt med row, col og value for cellen til højre for denne
             return { row: r, col: c + 1, value: this.get(r, c + 1) };
         }
@@ -112,7 +112,7 @@ export class grid {
         // Laver et objekt med row og col, så jeg kan bruge det i metoden
         const { row: r, col: c } = this._parseParams(row, col);
         // Tjekker om der er en celle under denne
-        if (r + 1 < this.rows) {
+        if (r + 1 < this._rows) {
             // Returnerer objekt med row, col og value for cellen under denne
             return { row: r + 1, col: c, value: this.get(r + 1, c) };
         }
@@ -123,7 +123,7 @@ export class grid {
         // Laver et objekt med row og col, så jeg kan bruge det i metoden
         const { row: r, col: c } = this._parseParams(row, col);
         // Tjekker om der er en celle over denne
-        if (r - 1 < this.rows) {
+        if (r - 1 < this._rows) {
             // Returnerer objekt med row, col og value for cellen over denne
             return { row: r + 1, col: c, value: this.get(r - 1, c) };
         }
@@ -136,7 +136,7 @@ export class grid {
         // Laver et objekt med row og col, så jeg kan bruge det i metoden
         const { row: r, col: c } = this._parseParams(row, col);
         // Tjekker om der er en celle udner denne
-        if (r + 1 < this.rows) {
+        if (r + 1 < this._rows) {
             // Returnerer objekt med row, col og value for cellen under denne
             return { row: r + 1, col: c, value: this.get(r + 1, c) };
         }
@@ -149,7 +149,7 @@ export class grid {
         // Laver et objekt med row og col, så jeg kan bruge det i metoden
         const { row: r, col: c } = this._parseParams(row, col);
         // Tjekker om der er en celle til højre for denne
-        if (c + 1 < this.cols) {
+        if (c + 1 < this._cols) {
             // Returnerer objekt med row, col og value for cellen til højre for denne
             return { row: r, col: c + 1, value: this.get(r, c + 1) };
         }
@@ -162,7 +162,7 @@ export class grid {
         // Laver et objekt med row og col, så jeg kan bruge det i metoden
         const { row: r, col: c } = this._parseParams(row, col);
         // Tjekker om der er en celle til venstre for denne
-        if (c - 1 < this.cols) {
+        if (c - 1 < this._cols) {
             // Returnerer objekt med row, col og value for cellen til venstre for denne
             return { row: r, col: c - 1, value: this.get(r, c - 1) };
         }
@@ -176,17 +176,17 @@ export class grid {
 
     // Returnerer antallet af rækker
     rows() {
-        return this.rows;
+        return this._rows;
     }
 
     // Returnerer antallet af kolonner
     cols() {
-        return this.cols;
+        return this._cols;
     }
 
     // Returnerer det samlede antal celler
     size() {
-        return this.rows * this.cols;
+        return this._rows * this._cols;
     }
 
     // =====================================
