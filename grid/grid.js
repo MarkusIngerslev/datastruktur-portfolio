@@ -45,28 +45,130 @@ export class grid {
     }
 
     // Returnerer en liste over alle naboceller til denne (i form af {row, col} objekter)
-    neighbours(row, col) {}
+    neighbours(row, col) {
+        // Laver et objekt med row og col, så jeg kan bruge det i metoden
+        const { row: r, col: c } = this._parseParams(row, col);
+        // Laver en tom liste til at gemme naboer
+        const neighbours = [];
+
+        // Tjekker for naboer for angivet celle
+        const directions = [
+            this.north(r, c), // Nabocelle over denne
+            this.south(r, c), // Nabocelle under denne
+            this.east(r, c), // Nabocelle til højre for denne
+            this.west(r, c), // Nabocelle til venstre for denne
+        ];
+
+        // Tjekker diagonale naboer (kombination af de 4 retninger)
+        // Tjekker først for diagonal venstre top
+        if (this.north(r, c) && this.west(r, c)) {
+            neighbours.push({ row: r - 1, col: c - 1 });
+        }
+        // Tjekker for diagonal højre top
+        if (this.north(r, c) && this.east(r, c)) {
+            neighbours.push({ row: r - 1, col: c + 1 });
+        }
+        // Tjekker for diagonal højre bund
+        if (this.south(r, c) && this.east(r, c)) {
+            neighbours.push({ row: r + 1, col: c + 1 });
+        }
+        // Tjekker for diagonal venstre bund
+        if (this.south(r, c) && this.west(r, c)) {
+            neighbours.push({ row: r + 1, col: c - 1 });
+        }
+
+        // Filtrér undefined værdier fra og returnér kun gyldige naboer
+        // Går igennem hver retning og tilføjer nabo til listen over naboer
+        directions.forEach((direction) => {
+            // Tjekker om der er en nabo i den retning
+            if (direction) {
+                // Pusher naboen til listen over naboer for retningen
+                neighbours.push.push({ row: direction.row, col: direction.col });
+            }
+        });
+
+        // Returnerer listen over naboer
+        return neighbours;
+    }
 
     // Returnerer en liste over alle nabocellers values
-    neighbourValues(row, col) {}
+    neighbourValues(row, col) {
+        return this.neighbours(row, col).map(({ row, col }) => this.get(row, col));
+    }
 
     // Returnerer cellen til højre efter denne, eller undefined hvis der ikke er flere i den row
-    nextInRow(row, col) {}
+    nextInRow(row, col) {
+        // Laver et objekt med row og col, så jeg kan bruge det i metoden
+        const { row: r, col: c } = this._parseParams(row, col);
+        // Tjekker om der er en celle til højre for denne
+        if (c + 1 < this.cols) {
+            // Returnerer objekt med row, col og value for cellen til højre for denne
+            return { row: r, col: c + 1, value: this.get(r, c + 1) };
+        }
+    }
 
     // Returnerer cellen under denne, eller undefined hvis der ikke er flere i den col
-    nextInCol(row, col) {}
+    nextInCol(row, col) {
+        // Laver et objekt med row og col, så jeg kan bruge det i metoden
+        const { row: r, col: c } = this._parseParams(row, col);
+        // Tjekker om der er en celle under denne
+        if (r + 1 < this.rows) {
+            // Returnerer objekt med row, col og value for cellen under denne
+            return { row: r + 1, col: c, value: this.get(r + 1, c) };
+        }
+    }
 
     // Returnerer cellen over denne, eller undefined, hvis der ikke er nogen
-    north(row, col) {}
+    north(row, col) {
+        // Laver et objekt med row og col, så jeg kan bruge det i metoden
+        const { row: r, col: c } = this._parseParams(row, col);
+        // Tjekker om der er en celle over denne
+        if (r - 1 < this.rows) {
+            // Returnerer objekt med row, col og value for cellen over denne
+            return { row: r + 1, col: c, value: this.get(r - 1, c) };
+        }
+        // Returnerer undefined, hvis der ikke er nogen celle over denne
+        return undefined;
+    }
 
-    // Returnerer cellen under denne. eller undefined, hvos der ikke er nogen
-    south(row, col) {}
+    // Returnerer cellen under denne, eller undefined, hvos der ikke er nogen
+    south(row, col) {
+        // Laver et objekt med row og col, så jeg kan bruge det i metoden
+        const { row: r, col: c } = this._parseParams(row, col);
+        // Tjekker om der er en celle udner denne
+        if (r + 1 < this.rows) {
+            // Returnerer objekt med row, col og value for cellen under denne
+            return { row: r + 1, col: c, value: this.get(r + 1, c) };
+        }
+        // Returnerer undefined, hvis der ikke er nogen celle under denne
+        return undefined;
+    }
 
     // Returnerer cellen til højre for denne, eller undefined, hvis der ikke er nogen
-    east(row, col) {}
+    east(row, col) {
+        // Laver et objekt med row og col, så jeg kan bruge det i metoden
+        const { row: r, col: c } = this._parseParams(row, col);
+        // Tjekker om der er en celle til højre for denne
+        if (c + 1 < this.cols) {
+            // Returnerer objekt med row, col og value for cellen til højre for denne
+            return { row: r, col: c + 1, value: this.get(r, c + 1) };
+        }
+        // Returnerer undefined, hvis der ikke er nogen celle til højre for denne
+        return undefined;
+    }
 
     // Returnerer cellen til venstre for denne, eller undefined, hvis der ikke er nogen
-    west(row, col) {}
+    west(row, col) {
+        // Laver et objekt med row og col, så jeg kan bruge det i metoden
+        const { row: r, col: c } = this._parseParams(row, col);
+        // Tjekker om der er en celle til venstre for denne
+        if (c - 1 < this.cols) {
+            // Returnerer objekt med row, col og value for cellen til venstre for denne
+            return { row: r, col: c - 1, value: this.get(r, c - 1) };
+        }
+        // Returnerer undefined, hvis der ikke er nogen celle til venstre for denne
+        return undefined;
+    }
 
     // =====================================
     // Metoder for struktur
