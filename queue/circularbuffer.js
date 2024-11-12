@@ -5,9 +5,10 @@ export class CircularBuffer {
     }
     this.arraySize = size;
     this.array = new Array(size).fill(null);
-    this.head = 0; // readIndex
-    this.tail = 0; // writeIndex
-    this.count = 0; // Antal elementer i bufferen
+    this.head = 0;
+    this.tail = 0;
+    x;
+    this.count = 0;
   }
 
   enqueue(data) {
@@ -24,7 +25,7 @@ export class CircularBuffer {
       throw new Error("Bufferen er tom. Kan ikke fjerne element.");
     }
     const data = this.array[this.head];
-    this.array[this.head] = null; // Valgfrit: Rydder pladsen
+    this.array[this.head] = null;
     this.head = (this.head + 1) % this.arraySize;
     this.count--;
     return data;
@@ -41,6 +42,18 @@ export class CircularBuffer {
     return this.count;
   }
 
+  get(index) {
+    if (index < 0 || index >= this.count) {
+      throw new Error("Indeks uden for rækkevidde.");
+    }
+    const actualIndex = (this.head + index) % this.arraySize;
+    return this.array[actualIndex];
+  }
+
+  // ********************
+  //    Helper methods
+  // ********************
+
   capacity() {
     return this.arraySize;
   }
@@ -51,13 +64,5 @@ export class CircularBuffer {
 
   isFull() {
     return this.count === this.arraySize;
-  }
-
-  get(index) {
-    if (index < 0 || index >= this.count) {
-      throw new Error("Indeks uden for rækkevidde.");
-    }
-    const actualIndex = (this.head + index) % this.arraySize;
-    return this.array[actualIndex];
   }
 }
